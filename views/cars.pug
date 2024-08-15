@@ -7,7 +7,9 @@ html
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet", href="/css/style.css")
     body    
-        h1 Cars
+        .header
+            h1 Cars
+            a(href="/update-cobj") Add to this table (Add new record)
         .cards 
             each car in data
                 .card 
