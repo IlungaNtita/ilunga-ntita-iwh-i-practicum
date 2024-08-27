@@ -31,56 +31,32 @@ app.get('/', async (req, res) => {
 
 // * Code for Route 2 goes here
 app.get('/update-cobj', async (req, res) => {
-    res.render('update', {});
+    res.render('update', { title: 'Update Custom Object Form | Integrating With HubSpot I Practicum' });
 });
-// TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
-
-/** 
-* * This is sample code to give you a reference for how you should structure your calls. 
-
-* * App.get sample
-app.get('/contacts', async (req, res) => {
-    const contacts = 'https://api.hubspot.com/crm/v3/objects/contacts';
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-        'Content-Type': 'application/json'
-    }
-    try {
-        const resp = await axios.get(contacts, { headers });
-        const data = resp.data.results;
-        res.render('contacts', { title: 'Contacts | HubSpot APIs', data });      
-    } catch (error) {
-        console.error(error);
-    }
-});
-
-* * App.post sample
-app.post('/update', async (req, res) => {
+app.post('/update-cobj', async (req, res) => {
     const update = {
         properties: {
-            "favorite_book": req.body.newVal
+            "car_name": req.body.car_name,
+            "car_color": req.body.car_color,
+            "car_price": req.body.car_price
         }
     }
 
-    const email = req.query.email;
-    const updateContact = `https://api.hubapi.com/crm/v3/objects/contacts/${email}?idProperty=email`;
+    const updateCar = 'https://api.hubspot.com/crm/v3/objects/cars';
     const headers = {
         Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
         'Content-Type': 'application/json'
     };
 
     try { 
-        await axios.patch(updateContact, update, { headers } );
-        res.redirect('back');
+        await axios.post(updateCar, update, { headers } );
+        res.redirect('/');
     } catch(err) {
         console.error(err);
     }
-
 });
-*/
-
 
 // * Localhost
 app.listen(3000, () => console.log('Listening on http://localhost:3000'));
